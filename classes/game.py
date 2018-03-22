@@ -1,10 +1,13 @@
 import random
 import colorama
 import os
+import math
 from .magic import Spell
+
 
 convert = ''
 strip = ''
+
 
 if 'PYCHARM_HOSTED' in os.environ:
     convert = False  # in PyCharm, we should disable convert
@@ -13,6 +16,20 @@ if 'PYCHARM_HOSTED' in os.environ:
 else:
     convert = None
     strip = None
+
+
+def round_number(num):
+    """
+    param: floating number
+    return:
+        math.ceil(num) if the ((int(num)+1) / num) - 1 > 0.75
+        math.floor(num) if the ((int(num)+1) / num) - 1 < 0.75
+    """
+    _, res = divmod(num, 1)
+    if res > 0.75:
+        return int(math.ceil(num))
+    else:
+        return int(math.floor(num))
 
 
 class bcolors():
@@ -111,12 +128,37 @@ class Person:
                   "(x" + str(item["quantity"]) + ")")
             i += 1
 
+    # def get_stats(self):
+    #     print("NAME                 HP                                    MP            ")
+    #     print("                     _________________________             ___________  ")
+    #     print(bcolors.BOLD +
+    #           self.name + "   " +
+    #           str(self.hp) + "/" + str(self.maxhp) + "  " + "|" +
+    #           bcolors.OKGREEN + "███████████       " + " |" +
+    #           bcolors.BOLD + "   " + str(self.mp) + "/" + str(self.maxmp) + " |" +
+    #           bcolors.OKMAGENTA + "█████   " + "|")
+
     def get_stats(self):
-        print("NAME                 HP                                    MP            ")
-        print("                     _________________________             ___________  ")
+        bar = ""
+        bar_ticks = (self.hp/self.maxhp)*100/5
+        bar_ticks = round_number(bar_ticks)
+
+        while bar_ticks > 0:
+            bar += "█"
+            bar_ticks -= 1
+
+        while len(bar) < 20:
+            bar += " "
+
+        print("                     _______________________________             ________________  ")
         print(bcolors.BOLD +
               self.name + "   " +
               str(self.hp) + "/" + str(self.maxhp) + "  " + "|" +
-              bcolors.OKGREEN + "███████████       " + " |" +
+              bcolors.OKGREEN + bar + "|" +
               bcolors.BOLD + "   " + str(self.mp) + "/" + str(self.maxmp) + " |" +
-              bcolors.OKMAGENTA + "█████   " + "|")
+              bcolors.OKMAGENTA + "██████████" + "|")
+        print("len(bar):", len(bar))
+
+
+
+

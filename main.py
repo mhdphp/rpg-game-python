@@ -1,21 +1,8 @@
 from classes.game import bcolors, Person
 from classes.magic import Spell
 from classes.inventory import Item
+import random
 import termcolor
-
-
-# print("\n\n")
-# print("NAME               HP                                  MP            ")
-# print("                   _________________________           ___________  ")
-# print(bcolors.BOLD + "Valos:    " +
-#       "460/460 |" + bcolors.OKGREEN +"███████████       " + " |" +
-#       bcolors.BOLD + "   65/65 |" + bcolors.OKMAGENTA +"█████   " + "|")
-# print("                   _________________________           ___________  ")
-# print("Valos:    460/460 |                         |   65/65 |           | ")
-# print("                   _________________________          ___________  ")
-# print("Valos:    460/460 |                         |   65/65 |           | ")
-#
-# print("\n\n")
 
 
 # black magic instantiation
@@ -52,7 +39,7 @@ player_items = [
 player1 = Person("Valos:", 1460, 165, 360, 34, player_magic, player_items)
 player2 = Person("Nick :", 2460, 265, 460, 34, player_magic, player_items)
 player3 = Person("Robot:", 3460, 165, 560, 34, player_magic, player_items)
-enemy = Person("Cruel:", 1200, 45, 45, 25, [], [])
+enemy = Person("Cruel:", 12000, 45, 250, 25, [], [])
 
 players = [player1, player2, player3]
 
@@ -143,9 +130,10 @@ while running:
     enemy_choice = 1
 
     enemy_dmg = enemy.generate_damage()
-    player.take_damage(enemy_dmg)
+    # player = players[random.randrange(0,3)]
+    player1.take_damage(enemy_dmg)
 
-    print("Enemy attacks for ", enemy_dmg)
+    print("Enemy attacks ",player.name, " for ", enemy_dmg)
     print("-------------------------------")
     print("Enemy HP: ", bcolors.FAIL + str(enemy.get_hp()) + "/" +
           str(enemy.get_max_hp()) + "\n" + bcolors.ENDC)
