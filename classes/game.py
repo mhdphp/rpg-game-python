@@ -87,14 +87,15 @@ class Person:
 
     def choose_action(self):
         i = 1
-        print("\n" + bcolors.OKBLUE + bcolors.BOLD + "ACTIONS" + bcolors.ENDC)
+        print("\n" + bcolors.BOLD + "    " + self.name + bcolors.ENDC)
+        print(bcolors.OKBLUE + bcolors.BOLD + "    ACTIONS" + bcolors.ENDC)
         for item in self.actions:
             print("    " + str(i), ". ", item)
             i += 1
 
     def choose_magic(self):
         i = 1
-        print("\n" + bcolors.OKGREEN + bcolors.BOLD + "MAGIC" + bcolors.ENDC)
+        print("\n" + bcolors.OKGREEN + bcolors.BOLD + "    MAGIC" + bcolors.ENDC)
         for spell in self.magic:
             print("    " + str(i), ". ", spell.name,
                   "(cost/damage: ", str(spell.cost) + "/" +
@@ -103,7 +104,7 @@ class Person:
 
     def choose_item(self):
         i = 1
-        print("\n" + bcolors.OKMAGENTA + bcolors.BOLD + "ITEMS" + bcolors.ENDC)
+        print("\n" + bcolors.OKMAGENTA + bcolors.BOLD + "    ITEMS" + bcolors.ENDC)
         # item is a dictionary with "item", "quantity" keys
         for item in self.items:
             print("    " + str(i), ". ", item["item"].name, ": ", item["item"].description,
@@ -111,8 +112,8 @@ class Person:
             i += 1
 
     def get_stats(self):
-        print("NAME               HP                                  MP            ")
-        print("                   _________________________           ___________  ")
+        print("NAME                 HP                                    MP            ")
+        print("                     _________________________             ___________  ")
         print(bcolors.BOLD +
               self.name + "   " +
               str(self.hp) + "/" + str(self.maxhp) + "  " + "|" +
