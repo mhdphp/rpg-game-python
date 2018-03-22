@@ -39,7 +39,7 @@ player_items = [
 player1 = Person("Valos:", 1460, 165, 360, 34, player_magic, player_items)
 player2 = Person("Nick :", 2460, 265, 460, 34, player_magic, player_items)
 player3 = Person("Robot:", 3460, 165, 560, 34, player_magic, player_items)
-enemy = Person("Cruel:", 12000, 45, 250, 25, [], [])
+enemy = Person("Cruel:", 5890, 45, 250, 25, [], [])
 
 players = [player1, player2, player3]
 

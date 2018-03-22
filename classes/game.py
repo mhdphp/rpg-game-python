@@ -128,36 +128,26 @@ class Person:
                   "(x" + str(item["quantity"]) + ")")
             i += 1
 
-    # def get_stats(self):
-    #     print("NAME                 HP                                    MP            ")
-    #     print("                     _________________________             ___________  ")
-    #     print(bcolors.BOLD +
-    #           self.name + "   " +
-    #           str(self.hp) + "/" + str(self.maxhp) + "  " + "|" +
-    #           bcolors.OKGREEN + "███████████       " + " |" +
-    #           bcolors.BOLD + "   " + str(self.mp) + "/" + str(self.maxmp) + " |" +
-    #           bcolors.OKMAGENTA + "█████   " + "|")
-
     def get_stats(self):
-        bar = ""
-        bar_ticks = (self.hp/self.maxhp)*100/5
-        bar_ticks = round_number(bar_ticks)
 
-        while bar_ticks > 0:
-            bar += "█"
-            bar_ticks -= 1
+        hp_ticks = (self.hp / self.maxhp) * 100 / 5
+        hp_ticks = round_number(hp_ticks)
+        hp_bar = hp_ticks * chr(9612)
+        hp_bar = hp_bar.ljust(20, ' ')
 
-        while len(bar) < 20:
-            bar += " "
+        mp_ticks = (self.mp / self.maxmp) * 100 / 10
+        mp_ticks = round_number(mp_ticks)
+        mp_bar = mp_ticks * chr(9612)
+        mp_bar = mp_bar.ljust(10, ' ')
 
-        print("                     _______________________________             ________________  ")
+        print("                    ________________             ________ ")
         print(bcolors.BOLD +
               self.name + "   " +
-              str(self.hp) + "/" + str(self.maxhp) + "  " + "|" +
-              bcolors.OKGREEN + bar + "|" +
+              str(self.hp) + "/" + str(self.maxhp) + " |" +
+              bcolors.OKGREEN + hp_bar + "|" +
               bcolors.BOLD + "   " + str(self.mp) + "/" + str(self.maxmp) + " |" +
-              bcolors.OKMAGENTA + "██████████" + "|")
-        print("len(bar):", len(bar))
+              bcolors.OKMAGENTA + mp_bar + "|")
+        print("len(hp_bar):", len(hp_bar))
 
 
 
