@@ -128,7 +128,7 @@ class Person:
                   "(x" + str(item["quantity"]) + ")")
             i += 1
 
-    def get_stats(self):
+    def get_stats1(self):
 
         hp_ticks = (self.hp / self.maxhp) * 100 / 5
         hp_ticks = round_number(hp_ticks)
@@ -149,6 +149,35 @@ class Person:
               bcolors.OKMAGENTA + mp_bar + "|")
         print("len(hp_bar):", len(hp_bar))
 
+    def get_stats(self):
+        hp_bar = ""
+        hp_ticks = (self.hp / self.maxhp) * 100 / 4
+
+        mp_bar = ""
+        mp_ticks = (self.mp / self.maxmp) * 100 / 10
+
+        while hp_ticks > 0:
+            hp_bar += "█"
+            hp_ticks -= 1
+
+        while len(hp_bar) < 25:
+            hp_bar += " "
+
+        while mp_ticks > 0:
+            mp_bar += "█"
+            mp_ticks -= 1
+
+        while len(mp_bar) < 10:
+            mp_bar += " "
+
+        print("                    _______________________________________             ________________ ")
+        print(bcolors.BOLD +
+              self.name + "   " +
+              str(self.hp) + "/" + str(self.maxhp) + " |" +
+              bcolors.OKGREEN + hp_bar + "|" +
+              bcolors.BOLD + "   " + str(self.mp) + "/" + str(self.maxmp) + " |" +
+              bcolors.OKMAGENTA + mp_bar + "|")
+        print("len(hp_bar):", len(hp_bar))
 
 
 
