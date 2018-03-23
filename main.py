@@ -23,7 +23,6 @@ hipotion = Item("Hi-Potion", "potion", "Heals 100 HP", 100)
 superpotion = Item("Super Potion", "potion", "Heals 1000 HP", 1000)
 elixer = Item("Elixer", "elixer", "Fully restores HP/MP of one party member", 9999)
 hielixer = Item("MegaElixer", "elixer", "Fully restores party's HP/MP", 9999)
-
 grenade = Item("Grenade", "attack", "Deals 500 damage", 500)
 
 player_magic = [fire, thunder, blizzard, meteor, quake, cure, cura]
@@ -133,7 +132,7 @@ while running:
     # player = players[random.randrange(0,3)]
     player1.take_damage(enemy_dmg)
 
-    print("Enemy attacks ",player.name, " for ", enemy_dmg)
+    print("Enemy attacks ",player1.name, " for ", enemy_dmg)
     print("-------------------------------")
     print("Enemy HP: ", bcolors.FAIL + str(enemy.get_hp()) + "/" +
           str(enemy.get_max_hp()) + "\n" + bcolors.ENDC)

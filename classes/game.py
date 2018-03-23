@@ -170,10 +170,24 @@ class Person:
         while len(mp_bar) < 10:
             mp_bar += " "
 
-        print("                    _______________________________________             ________________ ")
+        # add one or more blank spaces in front of hp/maxhp for preserving the formatting
+        hp_string = str(self.hp) + "/" + str(self.maxhp)
+        current_hp = ""
+
+        if len(hp_string) < 9:
+            decreased = 9 - len(hp_string)
+
+            while decreased > 0:
+                current_hp += " "
+                decreased -= 1
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
+
+        print("                    _________________________             __________ ")
         print(bcolors.BOLD +
               self.name + "   " +
-              str(self.hp) + "/" + str(self.maxhp) + " |" +
+              current_hp + " |" +
               bcolors.OKGREEN + hp_bar + "|" +
               bcolors.BOLD + "   " + str(self.mp) + "/" + str(self.maxmp) + " |" +
               bcolors.OKMAGENTA + mp_bar + "|")
