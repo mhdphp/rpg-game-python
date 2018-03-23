@@ -96,6 +96,7 @@ while running:
 
         elif index == 3:
             running = False
+            break
 
         elif index == 2:
             player.choose_item()
