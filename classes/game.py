@@ -193,5 +193,35 @@ class Person:
               bcolors.OKMAGENTA + mp_bar + "|")
         print("len(hp_bar):", len(hp_bar))
 
+    def get_enemy_stats(self):
+        hp_bar = ""
+        hp_ticks = (self.hp / self.maxhp) * 100 / 2
 
+        while hp_ticks > 0:
+            hp_bar += "█"
+            hp_ticks -= 1
 
+        while len(hp_bar) < 50:
+            hp_bar += " "
+
+        # add one or more blank spaces in front of hp/maxhp for preserving the formatting
+        hp_string = str(self.hp) + "/" + str(self.maxhp)
+        current_hp = ""
+
+        if len(hp_string) < 11:
+            decreased = 11 - len(hp_string)
+
+            while decreased > 0:
+                current_hp += " "
+                decreased -= 1
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
+
+        print("                    __________________________________________________ ")
+        print(bcolors.BOLD +
+              self.name + " " +
+              current_hp + " |" +
+              bcolors.FAIL + hp_bar + "|" +
+              bcolors.ENDC)
+        print("len(hp_bar):", len(hp_bar))

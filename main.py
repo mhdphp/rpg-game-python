@@ -35,10 +35,10 @@ player_items = [
     {"item": grenade, "quantity": 1}
 ]
 
-player1 = Person("Valos:", 1460, 165, 360, 34, player_magic, player_items)
-player2 = Person("Nick :", 2460, 265, 460, 34, player_magic, player_items)
-player3 = Person("Robot:", 3460, 165, 560, 34, player_magic, player_items)
-enemy = Person("Cruel:", 5890, 45, 250, 25, [], [])
+player1 = Person("Valos:", 4460, 265, 360, 125, player_magic, player_items)
+player2 = Person("Nick :", 6460, 365, 460, 250, player_magic, player_items)
+player3 = Person("Robot:", 7460, 465, 560, 301, player_magic, player_items)
+enemy = Person("Cruel:", 11200, 250, 450, 250, [], [])
 
 players = [player1, player2, player3]
 
@@ -50,11 +50,16 @@ i = 0
 
 while running:
     print("==================")
+    print("\n")
+    print("NAME               HP                                    MP")
     for player in players:
-        print("\n")
         player.get_stats()
-        # print("\n")
 
+    print("\n")
+
+    enemy.get_enemy_stats()
+
+    for player in players:
         player.choose_action()
 
         choice = input("Choose action:")
@@ -119,8 +124,13 @@ while running:
                 print(bcolors.OKGREEN + "\n" + item.name + " heals for "
                       + str(item.prop) + "HP: " + str(player.get_hp()) + bcolors.ENDC)
             elif item.type == "elixer":
-                player.hp = player.maxhp
-                player.mp = player.maxmp
+                if item.name == "MegaElixer":
+                    for i in players:
+                        i.hp = i.maxhp
+                        i.mp = i.maxmp
+                else:
+                    player.hp = player.maxhp
+                    player.mp = player.maxmp
                 print(bcolors.OKGREEN + "\n" + item.name + " fully restore HP/MP " + bcolors.ENDC)
             elif item.type == "attack":
                 enemy.take_damage(item.prop)
@@ -130,10 +140,10 @@ while running:
     enemy_choice = 1
 
     enemy_dmg = enemy.generate_damage()
-    # player = players[random.randrange(0,3)]
-    player1.take_damage(enemy_dmg)
+    target = random.randrange(0,3)
+    players[target].take_damage(enemy_dmg)
 
-    print("Enemy attacks ",player1.name, " for ", enemy_dmg)
+    print("Enemy attacks ",players[target].name, " for ", enemy_dmg)
     print("-------------------------------")
     print("Enemy HP: ", bcolors.FAIL + str(enemy.get_hp()) + "/" +
           str(enemy.get_max_hp()) + "\n" + bcolors.ENDC)
