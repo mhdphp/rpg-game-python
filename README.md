@@ -2,4 +2,4 @@
 ### The Complete Python 3 Course: Beginner to Advanced!
 ### Instructors: Joseph Delgadillo / Nick Germain
 
-Some solutions are not thouse from the course
+Some solutions are different from those presented in the course
