@@ -3,3 +3,6 @@
 ### Instructors: Joseph Delgadillo / Nick Germain
 
 Some solutions are different from those presented in the course
+
+Even the game is not fully operational (it  is not included the enemy choose items) I think this was a pretty good exercise.
+Thanks Nick Germain - https://github.com/nickgermaine
