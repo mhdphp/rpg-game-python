@@ -202,7 +202,8 @@ while running:
                     target_player = random.randrange(0, 3)
                     magic_dmg = spell.generate_dmg()
                     players[target_player].take_damage(magic_dmg)
-                    print(enemy.name, " directed black magic to ", players[target_player].name, " for ", magic_dmg)
+                    print(enemy.name, " directed black magic to ",
+                          players[target_player].name, " for ", magic_dmg)
                 else:
                     magic_dmg = spell.generate_dmg()
                     enemy.heal(magic_dmg)
