@@ -236,11 +236,20 @@ class Person:
         print("len(hp_bar):", len(hp_bar))
 
     def choose_enemy_spell(self):
-        magic_choice = random.randrange(0, len(self.magic))
-        spell = self.magic[magic_choice]
-        if self.get_mp() > spell.cost:
-            magic_dmg = spell.generate_dmg()
-            self.reduce_mp(spell.cost)
+        if self.get_hp() < 0.3 * self.get_max_hp():
+            magic_choice = random.randrange(5, 7)
+            spell = self.magic[magic_choice]
+            if self.get_mp() > spell.cost:
+                self.reduce_mp(spell.cost)
+            else:
+                return
         else:
-            return
+            magic_choice = random.randrange(0, 5)
+            spell = self.magic[magic_choice]
+            if self.get_mp() > spell.cost:
+                self.reduce_mp(spell.cost)
+            else:
+                return
         return spell
+    
+
