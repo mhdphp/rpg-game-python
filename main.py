@@ -7,15 +7,17 @@ import termcolor
 
 # black magic instantiation
 fire = Spell("Fire", 10, 100, "black")
-thunder = Spell("Thunder", 10, 100, "black")
-blizzard = Spell("Blizzard", 10, 100, "black")
-meteor = Spell("Meteor", 20, 200, "black")
-quake = Spell("Quake", 14, 140, "black")
+thunder = Spell("Thunder", 10, 200, "black")
+blizzard = Spell("Blizzard", 10, 300, "black")
+meteor = Spell("Meteor", 20, 500, "black")
+quake = Spell("Quake", 14, 700, "black")
 
 # white magic instantiation
 cure = Spell("Cure", 12, 120, "white")
 cura = Spell("Cura", 18, 200, "white")
 
+player_magic = [fire, thunder, blizzard, meteor, quake, cure, cura]
+enemy_magic = [fire, thunder, blizzard, meteor, quake, cure, cura]
 
 # Create some Items
 potion = Item("Potion", "potion", "Heals 50 HP", 50)
@@ -25,7 +27,6 @@ elixer = Item("Elixer", "elixer", "Fully restores HP/MP of one party member", 99
 hielixer = Item("MegaElixer", "elixer", "Fully restores party's HP/MP", 9999)
 grenade = Item("Grenade", "attack", "Deals 1200 damage", 1200)
 
-player_magic = [fire, thunder, blizzard, meteor, quake, cure, cura]
 player_items = [
     {"item": potion, "quantity": 1},
     {"item": hipotion, "quantity": 2},
@@ -39,9 +40,9 @@ player1 = Person("Valos:", 4460, 265, 360, 125, player_magic, player_items)
 player2 = Person("Nick :", 6460, 365, 460, 250, player_magic, player_items)
 player3 = Person("Robot:", 7460, 465, 560, 301, player_magic, player_items)
 
-enemy1 = Person("Cruel:", 1120, 150, 560, 325, [], [])
-enemy2 = Person("Magus:", 17200, 700, 525, 25, [], [])
-enemy3 = Person("Magog:", 1200, 135, 325, 300, [], [])
+enemy1 = Person("Cruel:", 1120, 150, 560, 325, enemy_magic, [])
+enemy2 = Person("Magus:", 17200, 700, 525, 25, enemy_magic, [])
+enemy3 = Person("Magog:", 1200, 135, 325, 300, enemy_magic, [])
 
 players = [player1, player2, player3]
 enemies = [enemy1, enemy2, enemy3]
@@ -56,7 +57,7 @@ running = True
 i = 0
 
 while running:
-    print("==================")
+    print("===============================================")
     print("\n")
     print("NAME               HP                                    MP")
     for player in players:
@@ -180,11 +181,32 @@ while running:
                 running = False
                 break
 
-    if defeated_enemies < 2:
-        enemy_dmg = enemy1.generate_damage()
-        target = random.randrange(0,3)
-        players[target].take_damage(enemy_dmg)
-        print("Enemy attacks ",players[target].name, " for ", enemy_dmg)
+    for enemy in enemies:
+        enemy_choice = random.randrange(0, 2)
+        # choose attack
+        if enemy_choice == 0:
+            target_player = random.randrange(0, 3)
+            enemy_dmg = enemy.generate_damage()
+
+            # get the random player, and apply attack
+            target_player = random.randrange(0, 3)
+            players[target_player].take_damage(enemy_dmg)
+            print(enemy.name, " attacks ", players[target_player].name, " for ", enemy_dmg)
+
+        # choose magic
+        if enemy_choice == 1:
+            spell = enemy.choose_enemy_spell()
+            if spell:
+                if spell.type == "black":
+                    # get the index of the player
+                    target_player = random.randrange(0, 3)
+                    magic_dmg = spell.generate_dmg()
+                    players[target_player].take_damage(magic_dmg)
+                    print(enemy.name, " directed black magic to ", players[target_player].name, " for ", magic_dmg)
+                else:
+                    magic_dmg = spell.generate_dmg()
+                    enemy.heal(magic_dmg)
+                    print(enemy.name, " white magic ", spell.name, " heals for ", magic_dmg)
 
     for player in players:
         if player.get_hp() == 0:
