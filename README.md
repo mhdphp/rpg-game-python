@@ -4,5 +4,5 @@
 
 Some solutions are different from those presented in the course
 
-Even the game is not fully operational (it  is not included the enemy choose items) I think this was a pretty good exercise.
+Even the game is not fully operational (it  is not included the enemy choose items - for instance, and some refactoring is needed also...) I think this was a pretty good exercise.
 Thanks Nick Germain - https://github.com/nickgermaine
