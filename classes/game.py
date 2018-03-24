@@ -2,7 +2,6 @@ import random
 import colorama
 import os
 import math
-from .magic import Spell
 
 
 convert = ''
@@ -251,5 +250,5 @@ class Person:
             else:
                 return
         return spell
-    
+
 
